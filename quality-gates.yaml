@@ -119,7 +119,7 @@ spec
                 echo '-=- execute unit tests -=-'
                 sh './mvnw test org.jacoco:jacoco-maven-plugin:report'
                 junit 'target/surefire-reports/*.xml'
-                jacoco execPattern: 'target/jacoco.exec'
+                jacoco execPattern:'target/jacoco.exec'
             }
         }
 
