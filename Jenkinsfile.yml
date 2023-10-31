@@ -78,26 +78,6 @@ spec:
                 }
             }
         }
-        stage('Compile') {
-            steps {
-                echo '-=- compiling project -=-'
-                sh './mvnw compile'
-            }
-        }
-        stage('Unit tests') {
-            steps {
-                echo '-=- execute unit tests -=-'
-                sh './mvnw test org.jacoco:jacoco-maven-plugin:report'
-                junit 'target/surefire-reports/*.xml'
-                jacoco execPattern: 'target/jacoco.exec'
-            }
-        }
-        stage('Mutation tests') {
-            steps {
-                echo '-=- execute mutation tests -=-'
-                sh './mvnw org.pitest:pitest-maven:mutationCoverage'
-            }
-        }
         stage('Quality Gates') {
             steps {
                 echo '-=- running quality gates -=-'
@@ -125,6 +105,26 @@ spec:
             steps {
                 echo '-=- execute mutation tests -=-'
                 sh './mvnw org.pitest:pitest-maven:mutationCoverage'
+            }
+        }
+        stage('Package') {
+            steps {
+                echo '-=- packaging project -=-'
+                sh './mvnw package -DskipTests'
+                archiveArtifacts artifacts: 'target/*.jar', fingerprint: true
+            }
+        }
+
+        stage('Build & push container image') {
+            steps {
+                echo '-=- build & push container image -=-'
+                container('podman') {
+                    sh "podman build -t $IMAGE_SNAPSHOT ."
+                    sh "podman tag $IMAGE_SNAPSHOT $CONTAINER_REGISTRY_URL/$IMAGE_SNAPSHOT"
+                    sh "podman push $CONTAINER_REGISTRY_URL/$IMAGE_SNAPSHOT"
+                    sh "podman tag $IMAGE_SNAPSHOT $CONTAINER_REGISTRY_URL/$IMAGE_SNAPSHOT_LATEST"
+                    sh "podman push $CONTAINER_REGISTRY_URL/$IMAGE_SNAPSHOT_LATEST"
+                }
             }
         }    
     }
