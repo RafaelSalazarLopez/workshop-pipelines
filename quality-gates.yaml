@@ -103,7 +103,7 @@ spec
                 echo '-=- running quality gates -=-'
                 script {
                     qualityGates = readYaml file 'quality-gates.yaml'
-                     Implement logic to check quality gates and handle successfailure
+                    Implement logic to check quality gates and handle successfailure
                 }
             }
         }
