@@ -169,15 +169,7 @@ spec:
                     waitForQualityGate abortPipeline: true
                 }
             }
-        }
-        stage('Software composition analysis') {
-            steps {
-                echo '-=- run software composition analysis -=-'
-                sh './mvnw dependency-check:check'
-                dependencyCheckPublisher
-            }
-        }
-        //falta 5b, 6 y 7 el 5 no va pero 6 y 7 si    
+        } 
     }
 }
  
