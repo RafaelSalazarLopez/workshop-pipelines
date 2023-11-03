@@ -195,15 +195,6 @@ spec:
                 }
             }
         }
-        #stage('Quality Gates') {
-        #    steps {
-        #        echo '-=- running quality gates -=-'
-        #        script {
-        #            qualityGates = readYaml file: 'quality-gates.yaml'
-        #            // Implement logic to check quality gates and handle success/failure
-        #        }
-        #    }
-        #}
         stage('Promote container image') {
             steps {
                 echo '-=- promote container image -=-'
