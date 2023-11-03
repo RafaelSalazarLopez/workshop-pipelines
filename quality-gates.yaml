@@ -1,21 +1,33 @@
-# Archivo quality-gates.yaml
-
-# Definición de un quality gate básico
-quality_gate:
-  # Estableciendo criterios para la calidad del código
-  code_quality:
-    # Estableciendo un umbral para la puntuación de calidad del código (de 0 a 100)
-    # Si la puntuación de calidad del código es menor que este umbral, el gate falla
-    score: 80
-
-  # Estableciendo criterios para la cobertura del código
-  code_coverage:
-    # Estableciendo un umbral para la cobertura del código (porcentaje)
-    # Si la cobertura del código es menor que este umbral, el gate falla
-    percentage: 70
-
-  # Estableciendo criterios para las pruebas unitarias
-  unit_tests:
-    # Estableciendo un umbral para el porcentaje de pruebas unitarias pasadas
-    # Si el porcentaje de pruebas unitarias pasadas es menor que este umbral, el gate falla
-    pass_percentage: 90
+performance:
+  throughput:
+    error:
+      unstable: 0
+      failed: 5
+    response:
+      unstable: 'default.jtl:100'
+ 
+security:
+  static:
+    high:
+      unstable: 0
+      failed: 0
+    medium:
+      unstable: 0
+      failed: 5
+  dynamic:
+    high:
+      unstable: 0
+      failed: 0
+    medium:
+      unstable: 0
+      failed: 5
+  dependencies:
+    critical:
+      unstable: 10
+      failed: 10
+    high:
+      unstable: 10
+      failed: 10
+    medium:
+      unstable: 15
+      failed: 15
