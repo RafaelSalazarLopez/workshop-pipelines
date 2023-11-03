@@ -187,7 +187,9 @@ spec:
                 }
             }
         }
-        post {
+        
+    }
+    post {
             always {
                 echo '-=- stop test container and remove deployment -=-'
                 container('kubectl') {
@@ -199,7 +201,6 @@ spec:
                 }
             }
         }
-    }
 }
  
 def getPomVersion() {
