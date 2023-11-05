@@ -218,7 +218,7 @@ spec:
                     sh "podman push $CONTAINER_REGISTRY_URL/$IMAGE_GA_LATEST"
                 }
             }
-        } 
+        }
         
     }
     post {
